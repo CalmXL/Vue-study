@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试PubSub-js</title>
+</head>
+<body>
+  <script src="./pub-sub.js"></script>
+  <script>
+    // const PubSub =  require('');
+
+    var token2 = PubSub.subcreibe('add', (data)=>{
+      console.log('add1')
+    })
+    var token = PubSub.subcreibe(111, (data)=>{
+      console.log('add2')
+    })
+    PubSub.subcreibe('delete', (data)=>{
+      console.log('delete',data)
+    })
+
+    // console.log(token)
+
+    PubSub.publish(token)
+    // PubSub.publishSync('add')
+    console.log('add()之后')
+
+
+  </script>
+  
+</body>
+</html>

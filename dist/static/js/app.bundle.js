@@ -1,0 +1,1 @@
+console.log("hello Webpack !!"),document.getElementById("root").innerHTML="<h1>Hello Webpack-dev-serve</h1>";
