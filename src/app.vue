@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>most stars repo is <a :href='url'>{{name}}</a></p>
+    <p >most stars repo is <a :href='url'>{{name}}</a></p>
   </div>
 </template>
 
@@ -13,9 +13,9 @@
       }
     },
 
-    mounted (){
-      //
-      this.$http.get('https://api.github.com/search/repositories?q=v&sort=stars')
+    mounted (){ 
+      // 利用 vue-resource发送 ajax 请求
+      this.$http.get('https://api.github.com/search/repositories?q=j&sort=stars')
         .then(response => {
           const result = response.data
           const {name, html_url} = result.items[0]
@@ -30,5 +30,7 @@
 </script>
 
 <style scoped>
- 
+  p{
+    font-size: 20px;
+  }
 </style>

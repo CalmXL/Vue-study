@@ -1,53 +1,36 @@
 <template>
   <div>
-    <p>click, {{conunt}}, is {{oddOrEven}}</p>
-    <button @click="increment">increment</button>
-    <button @click="decrement">decrement</button>
-    <button @click="ifOddIncrement">ifOddIncrement</button>
-    <button @click="incrementSync">incrementSync</button>
-
+    <p >most stars repo is <a :href='url'>{{name}}</a></p>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
-    data() {
+    data(){
       return{
-        conunt:0,
-        oddOrEven:''
+        name:'',
+        url:''
       }
     },
 
-    watch:{
-      conunt:function(a,b) {
-        a % 2 === 0 ? this.oddOrEven = "偶数" : this.oddOrEven = '奇数'
-      }
-    },
-    methods:{
-      increment(){
-        this.conunt++
-      },
-
-      decrement() {
-        this.conunt--
-      },
-
-      ifOddIncrement() {
-        if(this.conunt % 2 === 1) {
-          this.conunt++
-        }
-      },
-
-      incrementSync() {
-        setTimeout(() => {
-          this.conunt++
-        },1000)
-      }
-
+    mounted (){ 
+      // 利用 vue-resource发送 ajax 请求
+      this.$http.get('https://api.github.com/search/repositories?q=j&sort=stars')
+        .then(response => {
+          const result = response.data
+          const {name, html_url} = result.items[0]
+          this.name = name
+          this.url = html_url
+        })
+        .catch(error => {
+          console.log('出现了错误')
+        })
     }
   }
 </script>
 
 <style scoped>
- 
+  p{
+    font-size: 20px;
+  }
 </style>
